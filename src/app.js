@@ -2,10 +2,7 @@ import Project from './components/project.js'
 import Task from "./components/task.js";
 import { projectList } from './components/data.js';
 import ListItem from './components/listItem.js';
-
-
-const button = document.querySelector('.add');
-const rmButton = document.querySelector('.remove')
+import { newProjectButton, newProjPopup } from './domStuff.js';
 
 const callNewTask = (taskArr) => {
     // prompt the dom page to show a prompt 
@@ -25,12 +22,8 @@ const callNewListItem = (listArr) => {
 const work = new Project('Work', 'Blue');
 const school = new Project('school', 'red')
 
-button.addEventListener('click', () => {
-    work.addTask()
-})
-rmButton.addEventListener('click', () => {
-    work.tasks[0].addListItem()
-})
+newProjectButton.addEventListener('click', newProjPopup)
+
 
 
 
