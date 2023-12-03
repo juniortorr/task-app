@@ -4,6 +4,15 @@ import { projectList } from './components/data.js';
 import ListItem from './components/listItem.js';
 import { newProjectButton, newProjPopup } from './domStuff.js';
 
+// console.log(res) // Hi Ben!
+
+
+const initiateNewProj = (projTitle, priority) => {
+    const proj = new Project(projTitle, priority);
+    console.log('project added!')
+
+}
+
 const callNewTask = (taskArr) => {
     // prompt the dom page to show a prompt 
     let newTaskName = prompt('New task');
@@ -20,14 +29,14 @@ const callNewListItem = (listArr) => {
     console.log(listArr)
 }
 const work = new Project('Work', 'Blue');
-const school = new Project('school', 'red')
+
 
 newProjectButton.addEventListener('click', newProjPopup)
 
 
 
 
-export { callNewTask, callRemoveTask, callNewListItem }
+export { callNewTask, callRemoveTask, callNewListItem, initiateNewProj }
 // data.js
 // /components
     // project.js

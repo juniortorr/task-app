@@ -74,7 +74,7 @@ module.exports = {
       // define a relative or absolute path to template pages
 
       entry: {
-        index: './src/views/home.html',
+        index: './src/views/home.eta',
       },
       js: {
         // output filename of JS
