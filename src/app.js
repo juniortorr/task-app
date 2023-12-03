@@ -12,6 +12,9 @@ const initiateNewProj = (projTitle, priority) => {
     console.log('project added!')
 
 }
+// const initiateNewTask = (taskArr) => {
+     
+// }
 
 const callNewTask = (taskArr) => {
     // prompt the dom page to show a prompt 
