@@ -1,5 +1,6 @@
 import newProj from './views/partials/popup.html?render'
 import projCard from './views/partials/proj-card.html?render'
+import newTaskPopupTmpl from './views/partials/newTaskPopup.html?render'
 import { initiateNewProj } from './app';
 import { projectList } from './components/data';
 
@@ -17,8 +18,9 @@ function newProjPopup() {
     btn.addEventListener('click', () => {initiateNewProj(input.value, select.value)})
     console.log('you hit me')
 }
-function newTaskPopup (taskArr, taskListDiv) {
+function newTaskPopup (project, taskListDiv) {
     const div = document.createElement('div');
+    div.innerHTML = newTaskPopupTmpl;
     div.classList.add('newTaskPopup');
     body.append(div);
 }
@@ -38,7 +40,7 @@ function updateProjectList() {
         taskList.append(newTaskBtn)
         div.append(projTitle, taskList)
         cardContainer.append(div);
-        newTaskBtn.addEventListener('click', () => {newTaskPopup(project.tasks, taskList)})
+        newTaskBtn.addEventListener('click', () => {newTaskPopup(project, taskList)})
     })
     // cardContainer.innerHTML = projCard
     // const projTitle = document.querySelector('.projTitle');
