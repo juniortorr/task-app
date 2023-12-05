@@ -1,13 +1,15 @@
 
-    {{#each projectList}}
-<div class="projCard">
-    <div class="projTitleBox">
-            <h1 class="projTitle">{{this.title}}</h1>
+{{#each projectList}}
+    <div class="projCard">
+        <div class="projTitleBox">
+                <h1 class="projTitle">{{this.title}}</h1>
+        </div>
+
+        <ul class="taskList">
+            {{#each project.tasks}}
+                <li>{{this}}</li>
+            {{/each}}
+            <button class="newTaskBtn">add new task</button>
+        </ul>
     </div>
-
-    <ul class="taskList">
-
-        <button class="newTaskBtn">add new task</button>
-    </ul>
-</div>
 {{/each}}
