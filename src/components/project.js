@@ -1,15 +1,15 @@
-import { projectList } from "./data";
+import { projectList, updateProjectListData } from "./data";
 import { callNewTask } from "../app";
-import { updateProjectList } from "../domStuff";
+import { updateProjectListUI } from "../domStuff";
 
 export default class Project {
     constructor(title, priority) {
         this.title = title;
         this.priority = priority;
         this.tasks = []
-        projectList.push(this)
+        updateProjectListData(this)
         console.log(projectList)
-        updateProjectList()
+        updateProjectListUI(this)
     }
     speak(){
         console.log(this)

@@ -1,8 +1,9 @@
-import newProj from './views/partials/popup.html?render'
-import projCard from './views/partials/proj-card.html?render'
-import newTaskPopupTmpl from './views/partials/newTaskPopup.html?render'
+import newProj from './views/partials/popup.handlebars'
+import projCard from './views/partials/proj-card.handlebars'
+// import newTaskPopupTmpl from './views/partials/newTaskPopup.eta'
 import { initiateNewProj } from './app';
 import { projectList } from './components/data';
+import cardOptionsIcon from './images/card-options.png'
 
 // import projTemplate from './views/partials/proj-card.html?render'
 const newProjectButton = document.querySelector('.newProject')
@@ -11,49 +12,34 @@ const body = document.querySelector('body')
 
 
 function newProjPopup() {
-    cardContainer.innerHTML = newProj
+    cardContainer.innerHTML = newProj()
     const btn = document.querySelector('.createProject');
     const input = document.querySelector('input');
     const select = document.querySelector('select')
     btn.addEventListener('click', () => {initiateNewProj(input.value, select.value)})
     console.log('you hit me')
 }
-function newTaskPopup (project, taskListDiv) {
+function newTaskPopup (project) {
     const div = document.createElement('div');
-    div.innerHTML = newTaskPopupTmpl;
+    const test = 'test'
+    // div.innerHTML = newTaskPopupTmpl(test);
     div.classList.add('newTaskPopup');
     body.append(div);
-}
 
-function updateProjectList() {
-    cardContainer.innerHTML = ''
-    projectList.forEach((project) => {
-        const div = document.createElement('div');
-        const projTitle = document.createElement('h1');
-        const taskList = document.createElement('ul')
-        const newTaskBtn = document.createElement('button');
-        newTaskBtn.textContent = 'add new task'
-        div.classList.add('projCard')
-        projTitle.classList.add('projTitle', project.title.split(' ').join(''))
-        taskList.classList.add('taskList');
-        projTitle.textContent = project.title;
-        taskList.append(newTaskBtn)
-        div.append(projTitle, taskList)
-        cardContainer.append(div);
-        newTaskBtn.addEventListener('click', () => {newTaskPopup(project, taskList)})
-    })
-    // cardContainer.innerHTML = projCard
-    // const projTitle = document.querySelector('.projTitle');
-    // const projCardTmpl  = document.querySelector('.projCard');
-    // console.log(projTitle)
-    // projTitle.textContent = proj.title;
-    // projCardTmpl.classList.add(proj.title);
-    // console.log(proj)
+}   
 
-    // cardContainer.append(projCardTmpl)
+
+function updateProjectListUI(project) {
+    cardContainer.innerHTML = projCard({projectList, cardOptionsIcon})
+    const cardOptions = document.createElement('img');
+    const projTitleBox = document.querySelector('.projTitleBox');
+    const newTaskBtn = document.querySelector('.newTaskBtn')
+    cardOptions.src = cardOptionsIcon
+    projTitleBox.append(cardOptions)
+    newTaskBtn.addEventListener('click', () => {newTaskPopup(project)})
 }   
 
 
 
-export { newProjectButton, newProjPopup, updateProjectList }
+export { newProjectButton, newProjPopup, updateProjectListUI }
 

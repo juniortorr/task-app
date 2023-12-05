@@ -1,4 +1,5 @@
 import Project from './components/project.js'
+import './styles.css'
 import Task from "./components/task.js";
 import { projectList } from './components/data.js';
 import ListItem from './components/listItem.js';
