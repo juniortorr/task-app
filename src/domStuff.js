@@ -18,7 +18,6 @@ function newProjPopup() {
     const input = document.querySelector('input');
     const select = document.querySelector('select')
     btn.addEventListener('click', () => {initiateNewProj(input.value, select.value)})
-    console.log('you hit me')
 }
 function updateTodoUI(list, form) {
     console.log(list)
@@ -27,26 +26,43 @@ function updateTodoUI(list, form) {
     taskList.innerHTML = todoListTmpl({list})
 
 }
-function newTaskPopup (task) {
+function newTaskPopup (task, project) {
     const div = document.createElement('div');
     div.innerHTML = newTaskPopupTmpl();
     div.classList.add('newTaskPopup');
     body.append(div);
     const addNewTaskBtn = document.querySelector('.addNewTask');
     const todoForm = document.querySelector('form');
-
+    const complete = document.querySelector('.taskComplete');
     todoForm.addEventListener('submit', (e) => { e.preventDefault(), updateTodoData(task), updateTodoUI(task.list, todoForm)})
+    complete.addEventListener('click', () => {
+        const taskTitle = document.querySelector('.newTask');
+        const dueDate = document.querySelector('#dueDate');
+        const taskDesc = document.querySelector('#desc');
+        task.title = taskTitle.value;
+        task.dueDate = dueDate.value;
+        task.desc = taskDesc.value;
+        console.log(task)
+        body.removeChild(body.lastChild)
+        updateProjectListUI()
+        console.log(project)
+})
 }   
 
 
-function updateProjectListUI(project) {
-    cardContainer.innerHTML = projCard({projectList, cardOptionsIcon, project})
-    const cardOptions = document.createElement('img');
-    const projTitleBox = document.querySelector('.projTitleBox');
-    const newTaskBtn = document.querySelector('.newTaskBtn')
-    cardOptions.src = cardOptionsIcon
-    projTitleBox.append(cardOptions)
-    newTaskBtn.addEventListener('click', () => {initiateNewTask(project.tasks)})
+function updateProjectListUI() {
+    cardContainer.innerHTML = projCard({projectList, cardOptionsIcon})
+    const projTitleBox = document.querySelectorAll('.projTitleBox');
+    const newTaskBtn = document.querySelectorAll('.newTaskBtn')
+    projTitleBox.forEach((box) => {
+        const cardOptions = document.createElement('img')
+        cardOptions.src = cardOptionsIcon
+        box.append(cardOptions)
+    })
+    newTaskBtn.forEach((btn) => {
+        btn.addEventListener('click', () => {initiateNewTask(btn)})
+    })
+    // come back to this and add the display options functionality on the project class
 }   
 
 

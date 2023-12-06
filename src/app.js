@@ -3,7 +3,7 @@ import './styles.css'
 import Task from "./components/task.js";
 import { projectList } from './components/data.js';
 import ListItem from './components/listItem.js';
-import { newProjectButton, newProjPopup, newTaskPopup } from './domStuff.js';
+import { newProjectButton, newProjPopup, newTaskPopup, updateProjectListUI } from './domStuff.js';
 
 // console.log(res) // Hi Ben!
 
@@ -11,12 +11,20 @@ import { newProjectButton, newProjPopup, newTaskPopup } from './domStuff.js';
 const initiateNewProj = (projTitle, priority) => {
     const proj = new Project(projTitle, priority);
     console.log('project added!')
-
+    proj.updateProjectListData()
+    console.log(projectList)
+    updateProjectListUI()
 }
-const initiateNewTask = (taskArr) => {
+const initiateNewTask = (btn) => {
      const task = new Task();
-     taskArr.push(task)
-     newTaskPopup(task)
+    
+     projectList.forEach((project) => {
+        if(btn.classList.contains(project.title)){
+            console.log('here i am')
+            project.tasks.push(task);
+            newTaskPopup(task, project)
+        }   
+     })
 }
 
 const callRemoveTask = (task) =>{
@@ -28,6 +36,8 @@ const callNewListItem = (listArr) => {
     console.log(listArr)
 }
 const work = new Project('Work', 'Blue');
+work.updateProjectListData()
+updateProjectListUI()
 
 
 newProjectButton.addEventListener('click', newProjPopup)
@@ -35,7 +45,7 @@ newProjectButton.addEventListener('click', newProjPopup)
 
 
 
-export { callNewTask, callRemoveTask, callNewListItem, initiateNewProj, initiateNewTask }
+export { callRemoveTask, callNewListItem, initiateNewProj, initiateNewTask }
 // data.js
 // /components
     // project.js

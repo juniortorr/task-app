@@ -6,10 +6,10 @@
         </div>
 
         <ul class="taskList">
-            {{#each project.tasks}}
-                <li>{{this}}</li>
+            {{#each this.tasks}}
+                <li>{{this.title}}</li>
             {{/each}}
-            <button class="newTaskBtn">add new task</button>
+            <button class="newTaskBtn {{this.title}}">add new task</button>
         </ul>
     </div>
 {{/each}}

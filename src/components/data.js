@@ -1,9 +1,7 @@
 
 const projectList = [];
 
-function updateProjectListData(word) {
-    projectList.push(word)
-}
+
 function updateTodoData(task) {
     const todoInput = document.querySelector('.newTodo')
     task.title = todoInput.textContent;
@@ -11,4 +9,4 @@ function updateTodoData(task) {
     console.log(task.list)
 }
 
-export { projectList, updateProjectListData, updateTodoData }
+export { projectList, updateTodoData }

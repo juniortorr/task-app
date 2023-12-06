@@ -1,4 +1,4 @@
-import { projectList, updateProjectListData } from "./data";
+import { projectList } from "./data";
 import { callNewTask } from "../app";
 import { updateProjectListUI } from "../domStuff";
 
@@ -7,16 +7,15 @@ export default class Project {
         this.title = title;
         this.priority = priority;
         this.tasks = []
-        updateProjectListData(this)
         console.log(projectList)
         updateProjectListUI(this)
     }
     speak(){
         console.log(this)
     }
-    addTask() {
-        callNewTask(this.tasks)
-    }
+    // addTask() {
+    //     callNewTask(this.tasks)
+    // }
     removeTask() {
         let removeTaskName = prompt('which task')
         this.tasks.forEach((task) => {
@@ -25,6 +24,9 @@ export default class Project {
                 console.log(this.tasks)
             }
         })
+    }
+    updateProjectListData() {
+        projectList.push(this)
     }
 } 
 
