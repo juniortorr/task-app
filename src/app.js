@@ -26,6 +26,19 @@ const initiateNewTask = (btn) => {
         }   
      })
 }
+const callDeleteProject = (projectCard) => {
+    const projectTitle = projectCard.getAttribute('id');
+    const deleteOptionsBtn = projectCard.querySelector('.deleteProjectBtn');
+    deleteOptionsBtn.addEventListener('click', () => {
+        for(let i=0; i<projectList.length; i++){
+            if(projectList[i].title === projectTitle){
+                projectList.splice(i, 1);
+            }
+        }
+        domStuff.updateProjectListUI()
+    });
+
+}
 
 const callRemoveTask = (task) =>{
     console.log('hello')
@@ -45,7 +58,7 @@ newProjectButton.addEventListener('click', domStuff.newProjPopup)
 
 
 
-export { callRemoveTask, callNewListItem, initiateNewProj, initiateNewTask }
+export { callRemoveTask, callNewListItem, initiateNewProj, initiateNewTask, callDeleteProject }
 // data.js
 // /components
     // project.js

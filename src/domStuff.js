@@ -3,7 +3,7 @@ import projCard from './views/partials/proj-card.handlebars'
 import projectOptions from './views/partials/projectOptions.handlebars'
 import newTaskPopupTmpl from './views/partials/newTaskPopup.handlebars'
 import todoListTmpl from './views/partials/todo-list.handlebars'
-import { initiateNewProj, initiateNewTask } from './app';
+import { initiateNewProj, initiateNewTask, callDeleteProject } from './app';
 import { projectList, updateTodoData } from './components/data';
 import cardOptionsIcon from './images/card-options.png'
 
@@ -22,8 +22,9 @@ const domStuff = (function(){
         btn.addEventListener('click', () => {initiateNewProj(input.value, select.value)})
     }
     function updateTodoUI(list, form) {
-        console.log(list)
         const taskList = document.querySelector('.newTaskListUl')
+        const todoInput = document.querySelector('.newTodo');
+        todoInput.value = '';
         console.log(taskList)
         taskList.innerHTML = todoListTmpl({list})
     
@@ -72,6 +73,7 @@ const domStuff = (function(){
         const cancelOptionsBtn = projectCard.querySelector('.cancelOptionsBtn');
         cancelOptionsBtn.addEventListener('click', () => {projectCard.removeChild(projectCard.lastChild)})
     } 
+
     
     function projectOptionsPopup(titleDiv) {
         const projectCard = titleDiv.parentNode
@@ -80,6 +82,7 @@ const domStuff = (function(){
         projectCard.append(popUp);
         popUp.innerHTML = projectOptions()
         closeOptions(projectCard)
+        callDeleteProject(projectCard);
     }
     }   
 

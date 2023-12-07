@@ -16,6 +16,9 @@ export default class Project {
     // addTask() {
     //     callNewTask(this.tasks)
     // }
+    deleteProject(title){
+        console.log(title)
+    }
     removeTask() {
         let removeTaskName = prompt('which task')
         this.tasks.forEach((task) => {
