@@ -27,14 +27,14 @@ const domStuff = (function(){
         todoInput.value = '';
         console.log(taskList)
         taskList.innerHTML = todoListTmpl({list})
-    
+        
     }
 
     function newTaskPopup (task, project) {
         const div = document.createElement('div');
         div.innerHTML = newTaskPopupTmpl();
         div.classList.add('newTaskPopup');
-        body.append(div);
+        cardContainer.append(div);
         const addNewTaskBtn = document.querySelector('.addNewTask');
         const todoForm = document.querySelector('form');
         const complete = document.querySelector('.taskComplete');
@@ -50,7 +50,6 @@ const domStuff = (function(){
         task.dueDate = dueDate.value;
         task.desc = taskDesc.value;
         console.log(task)
-        body.removeChild(body.lastChild)
         updateProjectListUI()
         console.log(project)
     }   
@@ -60,7 +59,7 @@ const domStuff = (function(){
         const projTitleBox = document.querySelectorAll('.projTitleBox');
         const newTaskBtn = document.querySelectorAll('.newTaskBtn')
         projTitleBox.forEach((box) => {
-            const cardOptions = document.createElement('img')
+            const cardOptions = document.createElement('img') 
             cardOptions.classList.add('projectOptions')
             cardOptions.src = cardOptionsIcon
             box.append(cardOptions)
@@ -69,9 +68,10 @@ const domStuff = (function(){
         newTaskBtn.forEach((btn) => {
             btn.addEventListener('click', () => {initiateNewTask(btn)})
         })
+
     function closeOptions(projectCard) {
         const cancelOptionsBtn = projectCard.querySelector('.cancelOptionsBtn');
-        cancelOptionsBtn.addEventListener('click', () => {projectCard.removeChild(projectCard.lastChild)})
+        cancelOptionsBtn.addEventListener('click', () => {projectCard.removeChild(projectCard.lastChild), updateProjectListUI()})
     } 
 
     
