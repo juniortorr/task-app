@@ -130,6 +130,17 @@ html, body {
     box-sizing: border-box;
     color: white;
 }
+.priorityLevel {
+    width: 50px;
+    border-radius: 10px;
+    height: 18px;
+    background: #FA4848;
+    
+}
+.taskContainer {
+    display: flex;
+    gap: 10px;
+}
 
 .taskList {
     height: 80%;

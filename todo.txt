@@ -1,0 +1,6 @@
+- todo list item designs/functionality 
+- task pop up todo list item design/functionality (delete, checkmark, priority bar)
+- come up with logic for priority system of projects
+- add in date system
+
+https://moderncss.dev/pure-css-custom-checkbox-style/

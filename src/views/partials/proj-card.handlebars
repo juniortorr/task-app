@@ -7,7 +7,12 @@
 
         <ul class="taskList">
             {{#each this.tasks}}
-                <li>{{this.title}}</li>
+                {{!-- <li>{{this.title}}</li> --}}
+                <label class="taskContainer" for="checkBoxes">
+                    <input type="checkbox" name="checkbox">
+                    {{this.title}}
+                    <div class="priorityLevel"></div>
+                </label>
             {{/each}}
             <button class="newTaskBtn {{this.title}}">add new task</button>
         </ul>
