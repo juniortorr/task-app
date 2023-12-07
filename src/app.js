@@ -3,7 +3,7 @@ import './styles.css'
 import Task from "./components/task.js";
 import { projectList } from './components/data.js';
 import ListItem from './components/listItem.js';
-import { newProjectButton, newProjPopup, newTaskPopup, updateProjectListUI } from './domStuff.js';
+import { newProjectButton, domStuff } from './domStuff.js';
 
 // console.log(res) // Hi Ben!
 
@@ -13,7 +13,7 @@ const initiateNewProj = (projTitle, priority) => {
     console.log('project added!')
     proj.updateProjectListData()
     console.log(projectList)
-    updateProjectListUI()
+    domStuff.updateProjectListUI()
 }
 const initiateNewTask = (btn) => {
      const task = new Task();
@@ -22,7 +22,7 @@ const initiateNewTask = (btn) => {
         if(btn.classList.contains(project.title)){
             console.log('here i am')
             project.tasks.push(task);
-            newTaskPopup(task, project)
+            domStuff.newTaskPopup(task, project)
         }   
      })
 }
@@ -37,10 +37,10 @@ const callNewListItem = (listArr) => {
 }
 const work = new Project('Work', 'Blue');
 work.updateProjectListData()
-updateProjectListUI()
+domStuff.updateProjectListUI()
 
 
-newProjectButton.addEventListener('click', newProjPopup)
+newProjectButton.addEventListener('click', domStuff.newProjPopup)
 
 
 

@@ -110,6 +110,7 @@ html, body {
     background-color: lightblue;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .projTitleBox {
     display: flex;
@@ -182,4 +183,24 @@ html, body {
     height: 60%;
     background-color: white;
 
+}
+.projectOptionsPopup {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border: 2px solid lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.projectOptionBtns {
+    width: 200px;
+    height: 50px;
+    background-color: white;
+    border: 2px solid lightgrey;
+    color: darkgray;
+    cursor: pointer;
 }

@@ -1,7 +1,7 @@
 
 {{#each projectList}}
     <div class="projCard">
-        <div class="projTitleBox">
+        <div class="projTitleBox" id="{{this.title}}">
                 <h1 class="projTitle">{{this.title}}</h1>
         </div>
 
@@ -11,5 +11,6 @@
             {{/each}}
             <button class="newTaskBtn {{this.title}}">add new task</button>
         </ul>
+        
     </div>
 {{/each}}
