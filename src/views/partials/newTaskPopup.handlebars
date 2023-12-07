@@ -1,12 +1,12 @@
     <div class="popUpLeft">
-        <input placeholder="taskName" class="newTask" name="taskName" type="text">
+        <input required placeholder="taskName" class="newTask" name="taskName" type="text">
         <div class="newTaskList">
-            <form class='todo-form' action="">
+            <div class='todo-form'>
                 <input class="newTodo" type="text" name="new-todo">
                 <ul class="newTaskListUl">
                 </ul>
-                <button class="addNewTask"  type="submit">add new task</button>
-            </form>
+                <button class="addNewTask" type="button" >add new task</button>
+            </div>
         </div>
     </div>
     <div class="popUpLeft">
@@ -15,6 +15,6 @@
             <option value="tomorrow">Tomorrow</option>
         </select>
         <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
-        <button class="taskComplete">Complete Setup</button>
+        <button type="submit" class="taskComplete">Complete Setup</button>
     </div>
   

@@ -1,5 +1,5 @@
-<div class="newProjectPopup">
-    <input class="title" type="text" placeholder="new project">
+<form class="newProjectPopup">
+    <input required class="title" type="text" placeholder="new project">
     <button class="closePopup">X</button>
     <div class="newProjectOptions">
         <select name="priority" id="priority">
@@ -7,6 +7,6 @@
             <option value="important">important</option>
             <option value="least-important">least important</option>
         </select>
-        <button class="createProject">Create New Project</button>
+        <button type="submit" class="createProject">Create New Project</button>
     </div>
-</div>
+</form>

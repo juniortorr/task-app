@@ -16,10 +16,12 @@ const body = document.querySelector('body')
 const domStuff = (function(){
     function newProjPopup() {
         cardContainer.innerHTML = newProj()
-        const btn = document.querySelector('.createProject');
+        const form = document.querySelector('.newProjectPopup');
         const input = document.querySelector('input');
         const select = document.querySelector('select')
-        btn.addEventListener('click', () => {initiateNewProj(input.value, select.value)})
+        const closePopupBtn = document.querySelector('.closePopup');
+        closePopupBtn.addEventListener('click', () => {updateProjectListUI()})
+        form.addEventListener('submit', (e) => {initiateNewProj(input.value, select.value), e.preventDefault()})
     }
     function updateTodoUI(list, form) {
         const taskList = document.querySelector('.newTaskListUl')
@@ -31,15 +33,15 @@ const domStuff = (function(){
     }
 
     function newTaskPopup (task, project) {
-        const div = document.createElement('div');
-        div.innerHTML = newTaskPopupTmpl();
-        div.classList.add('newTaskPopup');
-        cardContainer.append(div);
+        const taskForm = document.createElement('form');
+        taskForm.innerHTML = newTaskPopupTmpl();
+        taskForm.classList.add('newTaskPopup');
+        cardContainer.append(taskForm);
         const addNewTaskBtn = document.querySelector('.addNewTask');
-        const todoForm = document.querySelector('form');
+        console.log(addNewTaskBtn)
         const complete = document.querySelector('.taskComplete');
-        todoForm.addEventListener('submit', (e) => { e.preventDefault(), updateTodoData(task), updateTodoUI(task.list, todoForm)})
-        complete.addEventListener('click', () => { completeTaskSetup(task, project) })
+        addNewTaskBtn.addEventListener('click', (e) => { updateTodoData(task), updateTodoUI(task.list, taskForm) })
+        taskForm.addEventListener('submit', (e) => {e.preventDefault(), completeTaskSetup(task, project) })
     }
 
     function completeTaskSetup(task, project) {
@@ -69,11 +71,6 @@ const domStuff = (function(){
             btn.addEventListener('click', () => {initiateNewTask(btn)})
         })
 
-    function closeOptions(projectCard) {
-        const cancelOptionsBtn = projectCard.querySelector('.cancelOptionsBtn');
-        cancelOptionsBtn.addEventListener('click', () => {projectCard.removeChild(projectCard.lastChild), updateProjectListUI()})
-    } 
-
     
     function projectOptionsPopup(titleDiv) {
         const projectCard = titleDiv.parentNode
@@ -81,7 +78,8 @@ const domStuff = (function(){
         popUp.classList.add('projectOptionsPopup');
         projectCard.append(popUp);
         popUp.innerHTML = projectOptions()
-        closeOptions(projectCard)
+        const cancelOptionsBtn = projectCard.querySelector('.cancelOptionsBtn');
+        cancelOptionsBtn.addEventListener('click', () => {updateProjectListUI()})
         callDeleteProject(projectCard);
     }
     }   
