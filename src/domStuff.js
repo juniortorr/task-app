@@ -3,17 +3,19 @@ import projCard from './views/partials/proj-card.handlebars'
 import projectOptions from './views/partials/projectOptions.handlebars'
 import newTaskPopupTmpl from './views/partials/newTaskPopup.handlebars'
 import todoListTmpl from './views/partials/todo-list.handlebars'
+import todayTaskTemp from './views/partials/today-task-filter.handlebars'
 import { initiateNewProj, initiateNewTask, callDeleteProject } from './app';
 import { projectList, updateTodoData } from './components/data';
 import cardOptionsIcon from './images/card-options.png'
+import { dateCheck } from './components/dateCheck'
 
-
-// import projTemplate from './views/partials/proj-card.html?render'
-const newProjectButton = document.querySelector('.newProject')
-const cardContainer = document.querySelector('.container');
-const body = document.querySelector('body')
 
 const domStuff = (function(){
+    const cardContainer = document.querySelector('.container');
+    const body = document.querySelector('body')
+    const todayBtn = document.querySelector('.today')
+    const newProjectButton = document.querySelector('.newProject')
+
     function newProjPopup() {
         cardContainer.innerHTML = newProj()
         const form = document.querySelector('.newProjectPopup');
@@ -23,6 +25,7 @@ const domStuff = (function(){
         closePopupBtn.addEventListener('click', () => {updateProjectListUI()})
         form.addEventListener('submit', (e) => {initiateNewProj(input.value, select.value), e.preventDefault()})
     }
+
     function updateTodoUI(list, form) {
         const taskList = document.querySelector('.newTaskListUl')
         const todoInput = document.querySelector('.newTodo');
@@ -70,8 +73,12 @@ const domStuff = (function(){
         newTaskBtn.forEach((btn) => {
             btn.addEventListener('click', () => {initiateNewTask(btn)})
         })
+    }   
 
-    
+    const todayTasksUI = (todayTaskList) => {
+        cardContainer.innerHTML = todayTaskTemp({todayTaskList})
+    }
+
     function projectOptionsPopup(titleDiv) {
         const projectCard = titleDiv.parentNode
         const popUp = document.createElement('div');
@@ -82,7 +89,18 @@ const domStuff = (function(){
         cancelOptionsBtn.addEventListener('click', () => {updateProjectListUI()})
         callDeleteProject(projectCard);
     }
-    }   
+
+    todayBtn.addEventListener('click', () => {
+        const list = dateCheck.filterTodayTasks()
+        if(list.length == 0) {
+            alert('nothing to see here')
+        } else {
+            todayTasksUI(list)
+        }
+
+    })
+
+    newProjectButton.addEventListener('click', () => { newProjPopup()})
 
     return {
         newProjPopup,
@@ -95,5 +113,5 @@ const domStuff = (function(){
 
 
 
-export { domStuff, newProjectButton }
+export { domStuff }
 

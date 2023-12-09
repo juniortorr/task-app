@@ -1,0 +1,16 @@
+<div class="todayContainer">
+    <div class="todayCard">
+
+    <ul class="taskList">
+        {{#each todayTaskList}}
+                <label class="taskContainer" for="checkBoxes">
+                    <input type="checkbox" name="checkbox">
+                    <p>{{this.title}}</p>
+                    <div class="priorityLevel"></div>
+                </label>
+        {{/each}}
+    </ul>
+
+
+</div>
+</div>
