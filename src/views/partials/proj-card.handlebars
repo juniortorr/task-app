@@ -1,20 +1,19 @@
 
-{{#each projectList}}
+{{#each arr}}
     <div class="projCard" id="{{this.title}}">
         <div class="projTitleBox" id="{{this.title}}">
-                <h1 class="projTitle">{{this.title}}</h1>
+                <h1  class="projTitle">{{this.title}}</h1>
         </div>
-
         <ul class="taskList">
             {{#each this.tasks}}
-                {{!-- <li>{{this.title}}</li> --}}
-                <label class="taskContainer" for="checkBoxes">
-                    <input type="checkbox" name="checkbox">
-                    {{this.title}}
+                <label  class="taskContainer" for="checkBoxes">
+                    <input type="checkbox" id="checkBoxes" name="checkbox">
+                    <p>{{this.title}}</p>
                     <div class="priorityLevel"></div>
                 </label>
             {{/each}}
-            <button class="newTaskBtn {{this.title}}">add new task</button>
+            <button class="newTaskBtn {{this.title}}">add new task +</button>
         </ul>
     </div>
 {{/each}}
+ 

@@ -1,4 +1,4 @@
-import { projectList } from "./data";
+import { data } from "./data";
 import { callNewTask } from "../app";
 import { domStuff } from "../domStuff";
 
@@ -7,15 +7,13 @@ export default class Project {
         this.title = title;
         this.priority = priority;
         this.tasks = []
-        console.log(projectList)
-        domStuff.updateProjectListUI(this)
     }
     speak(){
         console.log(this)
     }
-    // addTask() {
-    //     callNewTask(this.tasks)
-    // }
+    addTask(title) {
+        callNewTask(title, this.tasks)
+    }
     deleteProject(title){
         console.log(title)
     }
@@ -29,8 +27,10 @@ export default class Project {
         })
     }
     updateProjectListData() {
-        projectList.push(this)
+        data.projectList.push(this)
+        data.updatelocalStorage()
     }
 } 
+
 
 

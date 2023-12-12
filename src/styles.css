@@ -33,22 +33,20 @@ html, body {
     flex-wrap: wrap;
     margin: auto;
 }
-/* .card {
-    width: 300px;
-    background-color: lightblue;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-} */
-/* .overlay {
-    position: absolute;
-    z-index: 2;
-    width: 100vw;
-    height: 100vh;
-    background-color: lightgray;
-    opacity: .6;
-} */
+.sortOptions button {
+    background-color: white;
+    text-decoration: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: .7;
+    transition: ease-in-out .25s;
+}
+.sortOptions button:hover {
+    opacity: 1;
+    font-size: 1.2rem;
+    text-decoration: underline;
+}
 .newProjectPopup {
     margin: auto;
     height: 230px;
@@ -111,6 +109,7 @@ html, body {
     display: flex;
     flex-direction: column;
     position: relative;
+    border-radius: 15px;
 }
 .projTitleBox {
     display: flex;
@@ -120,6 +119,8 @@ html, body {
     height: 60px;
     padding: 0px 20px;
     box-sizing: border-box;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 .projTitleBox img {
     height: 10px;
@@ -140,12 +141,19 @@ html, body {
 .taskContainer {
     display: flex;
     gap: 10px;
+    height: 40px; 
+    align-items: center;
+    border-bottom: 2px solid #B2B2B2;
+    width: 85%;
+}
+.taskContainer p {
+    margin: 0;
+    font-size: 18px ;
 }
 
 .taskList {
     height: 80%;
     width: 90%;
-    border: 1px solid black;
     box-sizing: border-box;
     margin: auto;
     display: flex;
@@ -173,6 +181,12 @@ html, body {
     align-items: center;
     justify-content: space-around;
     
+}
+.newTaskBtn {
+    background-color: lightblue;
+    border: none;
+    margin-top: 10px;
+    font-size: 1rem;
 }
 .newTask {
     height: 60px;  
