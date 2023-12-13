@@ -21,3 +21,7 @@ const checkmarkStatus = (para, label) => {
 export {
     checkmarkStatus
 }
+
+// {{!-- <div class="checkBoxTest">
+// <div class="checkBoxFiller"></div>
+// </div> --}}

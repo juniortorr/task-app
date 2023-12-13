@@ -6,6 +6,17 @@ html, body {
 button {
     cursor: pointer;
 }
+li {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+p {
+    margin: 0;
+}
+.todoOptions {
+    height: 5px;
+}
 .header{
     display: flex;
     justify-content: space-between;
@@ -108,7 +119,7 @@ button {
 .projCard {
     width: 300px;
     height: 400px;
-    background-color: lightblue;
+    background: linear-gradient(to top right, darkgray, white);
     display: flex;
     flex-direction: column;
     position: relative;
@@ -117,7 +128,6 @@ button {
 .projTitleBox {
     display: flex;
     align-items: center;
-    background: #737373;
     justify-content: space-between;
     height: 60px;
     padding: 0px 20px;
@@ -132,7 +142,7 @@ button {
 .projCard h1 {
     margin: 0 0;
     box-sizing: border-box;
-    color: white;
+    color: black;
 }
 .priorityLevel {
     width: 50px;
@@ -188,7 +198,7 @@ button {
     
 }
 .newTaskBtn {
-    background-color: lightblue;
+    background-color: rgb(0 0 0 / 0%);
     border: none;
     margin-top: 10px;
     font-size: 1rem;

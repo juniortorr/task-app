@@ -9,6 +9,7 @@ import { data } from './components/data';
 import cardOptionsIcon from './images/card-options.png'
 import { dateCheck } from './components/dateCheck'
 import { checkmarkStatus } from './components/checkmark'
+import ListItem from './components/listItem'
 
 
 
@@ -73,10 +74,23 @@ const domStuff = (function(){
         todoList.innerHTML = todoListTmpl({list})
         const allTodoLi = todoList.querySelectorAll('li');
         allTodoLi.forEach((todo) => { 
+            const text = todo.querySelector('p');
             const todoOptions = document.createElement('img')
             todoOptions.src = cardOptionsIcon;
             todoOptions.classList.add('todoOptions');
             todo.append(todoOptions)
+            todoOptions.addEventListener('click', () => {
+                for(let i=0; i<list.length; i++){
+                    if(text.textContent === list[i]){
+                        list.splice(i, 1)
+                        console.log(list, 'deleted!')
+                        updateTodoUI(list, taskForm)
+                    }
+                }
+                // loop through the list 
+                // if the value of the todo is the same as todo 
+                // then splice the todo out
+            })
             
         })
     }
