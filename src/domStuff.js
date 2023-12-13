@@ -4,10 +4,11 @@ import projectOptions from './views/partials/projectOptions.handlebars'
 import newTaskPopupTmpl from './views/partials/newTaskPopup.handlebars'
 import todoListTmpl from './views/partials/todo-list.handlebars'
 import todayTaskTemp from './views/partials/today-task-filter.handlebars'
-import { initiateNewProj, initiateNewTask, callDeleteProject, initiateTaskDisplay } from './app';
+import { initiateNewProj, initiateNewTask, callDeleteProject, initiateTaskDisplay, isTaskCreated } from './app';
 import { data } from './components/data';
 import cardOptionsIcon from './images/card-options.png'
 import { dateCheck } from './components/dateCheck'
+import { checkmarkStatus } from './components/checkmark'
 
 
 
@@ -44,45 +45,56 @@ const domStuff = (function(){
         const taskForm = document.createElement('form');
         taskForm.innerHTML = newTaskPopupTmpl();
         const taskName = taskForm.querySelector('.newTask')
-        const addNewTaskBtn = taskForm.querySelector('.addNewTask');
-        const todoList = taskForm.querySelector('.newTaskListUl')
+        const addNewTodoBtn = taskForm.querySelector('.addNewTodo');
+        const todoList = taskForm.querySelector('.todoList')
         const dueDate = taskForm.querySelector('#dueDate');
         const desc = taskForm.querySelector('#desc')
         const popUpLeft = taskForm.querySelector('.popUpLeft');
         const taskDeleteBtn = createTaskDeleteBtn(task, project);
+        createClosePopupBtn(task, project, taskForm)
         popUpLeft.append(taskDeleteBtn)
-        task.list.forEach((todo) => {
-            const li = document.createElement('li')
-            li.textContent = todo;
-            todoList.append(li);
-        })
+        updateTodoUI(task.list, taskForm)
         taskName.value = task.title
         dueDate.setAttribute('placeholder', task.dueDate) 
         desc.value = task.desc
         taskForm.classList.add('newTaskPopup')
         taskForm.setAttribute('action', '/')
         cardContainer.append(taskForm)
-        addNewTaskBtn.addEventListener('click', (e) => { data.updateTodoData(task), updateTodoUI(task.list, taskForm) })
+        addNewTodoBtn.addEventListener('click', (e) => { data.updateTodoData(task), updateTodoUI(task.list, taskForm) })
         taskForm.addEventListener('submit', (e) => {completeTaskSetup(task, project), e.preventDefault()})
     }
 
-    const updateTodoUI = (list, form) => {
-        const taskList = document.querySelector('.newTaskListUl')
-        const todoInput = document.querySelector('.newTodo');
+    const updateTodoUI = (list, taskForm) => {
+        const todoList = taskForm.querySelector('.todoList')
+        const todoInput = taskForm.querySelector('.newTodo');
+        console.log(todoInput)
         todoInput.value = '';
-        console.log(taskList)
-        taskList.innerHTML = todoListTmpl({list})
-        
+        console.log(todoList)
+        todoList.innerHTML = todoListTmpl({list})
+        const allTodoLi = todoList.querySelectorAll('li');
+        allTodoLi.forEach((todo) => { 
+            const todoOptions = document.createElement('img')
+            todoOptions.src = cardOptionsIcon;
+            todoOptions.classList.add('todoOptions');
+            todo.append(todoOptions)
+            
+        })
     }
+
+    const createClosePopupBtn = (task, project, taskForm) => {
+        const closePopupBtn = taskForm.querySelector('.closePopup');
+        closePopupBtn.addEventListener('click', () => { isTaskCreated(task, project) })
+    } 
 
     const newTaskPopup  = (task, project) => {
         const taskForm = document.createElement('form');
         taskForm.innerHTML = newTaskPopupTmpl();
+        const addNewTodoBtn = taskForm.querySelector('.addNewTodo');
         taskForm.classList.add('newTaskPopup');
         taskForm.setAttribute('action', '/')
         cardContainer.append(taskForm);
-        const addNewTaskBtn = document.querySelector('.addNewTask');
-        addNewTaskBtn.addEventListener('click', (e) => { data.updateTodoData(task), updateTodoUI(task.list, taskForm) })
+        createClosePopupBtn(task, project, taskForm);
+        addNewTodoBtn.addEventListener('click', (e) => { data.updateTodoData(task), updateTodoUI(task.list, taskForm) })
         taskForm.addEventListener('submit', (e) => {completeTaskSetup(task, project), e.preventDefault()})
     }
 
@@ -99,13 +111,23 @@ const domStuff = (function(){
         updateProjectListUI()
     }   
 
+    const checkMarkEvents = () => {
+        const labels = document.querySelectorAll('label')
+        labels.forEach((label) => {
+            const para = label.querySelector('p')
+            para.addEventListener('click', () => { initiateTaskDisplay(para) })
+            label.addEventListener('click', () => { checkmarkStatus(para, label)})
+         })
+    }
+
+
 
     const updateProjectListUI = () => {
         const arr = [...data.projectList]
         cardContainer.innerHTML = projCard({arr, cardOptionsIcon})
         const projTitleBox = document.querySelectorAll('.projTitleBox');
         const newTaskBtn = document.querySelectorAll('.newTaskBtn')
-        const labels = document.querySelectorAll('label')
+        checkMarkEvents()
         projTitleBox.forEach((box) => {
             const cardOptions = document.createElement('img') 
             cardOptions.classList.add('projectOptions')
@@ -113,10 +135,7 @@ const domStuff = (function(){
             box.append(cardOptions)
             cardOptions.addEventListener('click', () => {projectOptionsPopup(box)})
         })
-        labels.forEach((label) => {
-            const para = label.querySelector('p')
-            para.addEventListener('click', () => { initiateTaskDisplay(para) })
-        })
+
         newTaskBtn.forEach((btn) => {
             btn.addEventListener('click', () => {initiateNewTask(btn)})
         })
@@ -160,7 +179,7 @@ const domStuff = (function(){
     })
 
 
-    newProjectButton.addEventListener('click', () => { newProjPopup()})
+    newProjectButton.addEventListener('click', () => { newProjPopup() })
 
     return {
         newProjPopup,

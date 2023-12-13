@@ -9,16 +9,23 @@ import ListItem from "./listItem";
         this.desc = desc
         this.list = []
         this.value = title
+        this.checkStatus
     }
 
     addListItem() {
         callNewListItem(this.list)
     }
-
-
     updateTaskData() {
         data.tasks.push(this)
         data.updatelocalStorage()
+    }
+
+    toggleCheckmark() {
+        if(this.checkStatus === 'checked') {
+            this.checkStatus = ''
+        } else {
+            this.checkStatus = 'checked'
+        }
     }
 
     deleteTask(project) {

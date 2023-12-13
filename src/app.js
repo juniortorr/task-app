@@ -49,6 +49,15 @@ const callDeleteProject = (projectCard) => {
         domStuff.updateProjectListUI()
 }
 
+const isTaskCreated = (task, project) =>{
+    if(task.title) {
+        domStuff.updateProjectListUI()
+    } else {
+        task.deleteTask(project);
+        domStuff.updateProjectListUI();
+    }
+}
+
 const callNewTask = (title, tasks) => {
     const task = new Task(title, '12-12-2023')
     tasks.push(task);
@@ -83,4 +92,4 @@ dateCheck.filterUpcomingTasks()
 
 
 
-export { callRemoveTask, callNewListItem, initiateNewProj, initiateNewTask, callDeleteProject, callNewTask, initiateTaskDisplay  }
+export { callRemoveTask, callNewListItem, initiateNewProj, initiateNewTask, callDeleteProject, callNewTask, initiateTaskDisplay, isTaskCreated  }

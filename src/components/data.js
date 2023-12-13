@@ -16,11 +16,9 @@ const data = (function() {
 
     const updatelocalStorage = () => {
         localStorage.clear();
-        console.log(tasks)
         localStorage.setItem('projectList', JSON.stringify(data.projectList))
         localStorage.setItem('trial', JSON.stringify(['hi', 'there']))
         localStorage.setItem('tasks', JSON.stringify(tasks))
-        console.log()
     }
 
     const getProjectData = () => {
