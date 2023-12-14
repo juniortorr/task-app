@@ -7,12 +7,10 @@ import { newProjectButton, domStuff } from './domStuff.js';
 import {format} from 'date-fns'
 import { dateCheck } from './components/dateCheck.js';
 
-const initiateNewProj = (projTitle, priority) => {
+const initiateNewProj = (projTitle) => {
     projTitle = projTitle.split(' ').join('-')
-    const proj = new Project(projTitle, priority);
+    const proj = new Project(projTitle);
     proj.updateProjectListData()
-    const storedData = data.getStorageData()
-    console.log(storedData)
     domStuff.updateProjectListUI()
 }
 const initiateNewTask = (btn) => {

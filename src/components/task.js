@@ -10,6 +10,7 @@ import ListItem from "./listItem";
         this.list = []
         this.value = title
         this.checkStatus
+        this.priority
     }
 
     addListItem() {
@@ -26,6 +27,13 @@ import ListItem from "./listItem";
         } else {
             this.checkStatus = 'checked'
         }
+    }
+
+    setPriority() {
+        const today = new Date();
+        const splitDueDate = this.dueDate.split('-');
+        const formatDueDate = [splitDueDate[2], splitDueDate[0]-1, splitDueDate[1]]
+        console.log(new Date(formatDueDate[0], formatDueDate[1], formatDueDate[2]))
     }
 
     deleteTask(project) {

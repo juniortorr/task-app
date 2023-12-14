@@ -18,6 +18,7 @@ const dateCheck = (function(){
         return todayTasks;
     }
 
+    
     const filterUpcomingTasks = () => {
         const today =  new Date()
         const thisWeek = addDays(today, 7)

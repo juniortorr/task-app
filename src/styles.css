@@ -63,12 +63,12 @@ p {
 }
 .newProjectPopup {
     margin: auto;
-    height: 230px;
+    height: 175px;
     background-color: lightpink;
     width: 350px;
     display: flex; 
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     align-items: center;
     border-radius: 15px;
     position: relative;
@@ -186,6 +186,7 @@ p {
 .newTaskPopup {
     position: absolute;
     display: flex;
+    flex-direction: column;
     top: 100px;
     left: 50%;
     width: 800px;
@@ -194,8 +195,16 @@ p {
     z-index: 5;
     margin-left: -400px; 
     align-items: center;
-    justify-content: space-around;
     
+}
+.taskPopupWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
 }
 .newTaskBtn {
     background-color: rgb(0 0 0 / 0%);
@@ -256,4 +265,12 @@ p {
     width: 60%;
     height: 60%;
     background-color: lightblue;
+}
+
+input[type=checkbox] {
+    border-radius: 15px;
+    border: none;
+    accent-color: green;
+    height: 16px;
+    width: 16px;
 }

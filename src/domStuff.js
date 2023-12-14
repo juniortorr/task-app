@@ -25,11 +25,10 @@ const domStuff = (function(){
         cardContainer.innerHTML = newProj()
         const form = document.querySelector('.newProjectPopup');
         const input = document.querySelector('input');
-        const select = document.querySelector('select')
         const closePopupBtn = document.querySelector('.closePopup');
         closePopupBtn.addEventListener('click', () => {updateProjectListUI()})
         form.addEventListener('submit', (e) => {
-            initiateNewProj(input.value, select.value), e.preventDefault()
+            initiateNewProj(input.value), e.preventDefault()
         })
     }
 
@@ -87,9 +86,6 @@ const domStuff = (function(){
                         updateTodoUI(list, taskForm)
                     }
                 }
-                // loop through the list 
-                // if the value of the todo is the same as todo 
-                // then splice the todo out
             })
             
         })
@@ -117,10 +113,12 @@ const domStuff = (function(){
         const dueDate = document.querySelector('#dueDate');
         const taskDesc = document.querySelector('#desc');
         const splitDate = dueDate.value.split('-');
-        const formatDueDate = [splitDate[1], splitDate[2], splitDate[0]].join('-')
+        const formatDueDate = [splitDate[1], splitDate[2], splitDate[0]].join('-');
+        console.log(formatDueDate)
         task.title = taskTitle.value;
         task.dueDate = formatDueDate;
         task.desc = taskDesc.value;
+        task.setPriority()
         data.updatelocalStorage();
         updateProjectListUI()
     }   
