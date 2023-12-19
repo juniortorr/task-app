@@ -27,49 +27,34 @@ const domStuff = (function(){
         const input = document.querySelector('input');
         const closePopupBtn = document.querySelector('.closePopup');
         closePopupBtn.addEventListener('click', () => {updateProjectListUI()})
-        form.addEventListener('submit', (e) => {
-            initiateNewProj(input.value), e.preventDefault()
-        })
+        form.addEventListener('submit', (e) => { initiateNewProj(input.value), e.preventDefault() })
     }
 
-    const createTaskDeleteBtn = (task, project) => {
-        const taskDeleteBtn = document.createElement('button');
-        taskDeleteBtn.classList.add('taskDeleteBtn');
-        taskDeleteBtn.setAttribute('type', 'button')
-        taskDeleteBtn.textContent = 'Delete Task'
-        taskDeleteBtn.addEventListener('click', () => { task.deleteTask(project), updateProjectListUI() })
-        return taskDeleteBtn
+    const createTaskForm = () => {
+        const taskForm = document.createElement('form');
+        taskForm.innerHTML = newTaskPopupTmpl();
+        taskForm.classList.add('newTaskPopup')
+        taskForm.setAttribute('action', '/')
+        taskForm.addEventListener('submit', (e) => {completeTaskSetup(task, project), e.preventDefault()})
+        return taskForm
     }
 
     const displaySelectedTask = (task, project) => {
-        const taskForm = document.createElement('form');
-        taskForm.innerHTML = newTaskPopupTmpl();
-        const taskName = taskForm.querySelector('.newTask')
+        const taskForm = createTaskForm()
         const addNewTodoBtn = taskForm.querySelector('.addNewTodo');
-        const todoList = taskForm.querySelector('.todoList')
-        const dueDate = taskForm.querySelector('#dueDate');
-        const desc = taskForm.querySelector('#desc')
         const popUpLeft = taskForm.querySelector('.popUpLeft');
         const taskDeleteBtn = createTaskDeleteBtn(task, project);
+        populateTaskformFields(taskForm, task)
         createClosePopupBtn(task, project, taskForm)
         popUpLeft.append(taskDeleteBtn)
-        updateTodoUI(task.list, taskForm)
-        taskName.value = task.title
-        dueDate.setAttribute('placeholder', task.dueDate) 
-        desc.value = task.desc
-        taskForm.classList.add('newTaskPopup')
-        taskForm.setAttribute('action', '/')
         cardContainer.append(taskForm)
         addNewTodoBtn.addEventListener('click', (e) => { data.updateTodoData(task), updateTodoUI(task.list, taskForm) })
-        taskForm.addEventListener('submit', (e) => {completeTaskSetup(task, project), e.preventDefault()})
-    }
+    } 
 
     const updateTodoUI = (list, taskForm) => {
         const todoList = taskForm.querySelector('.todoList')
         const todoInput = taskForm.querySelector('.newTodo');
-        console.log(todoInput)
         todoInput.value = '';
-        console.log(todoList)
         todoList.innerHTML = todoListTmpl({list})
         const allTodoLi = todoList.querySelectorAll('li');
         allTodoLi.forEach((todo) => { 
@@ -91,21 +76,38 @@ const domStuff = (function(){
         })
     }
 
+    const createTaskDeleteBtn = (task, project) => {
+        const taskDeleteBtn = document.createElement('button');
+        taskDeleteBtn.classList.add('taskDeleteBtn');
+        taskDeleteBtn.setAttribute('type', 'button')
+        taskDeleteBtn.textContent = 'Delete Task'
+        taskDeleteBtn.addEventListener('click', () => { task.deleteTask(project), updateProjectListUI() })
+        return taskDeleteBtn
+    }
+
+    const populateTaskformFields = (taskForm, task) => {
+        const taskName = taskForm.querySelector('.newTask')
+        const dueDate = taskForm.querySelector('#dueDate');
+        const desc = taskForm.querySelector('#desc')
+        taskName.value = task.title
+        dueDate.setAttribute('placeholder', task.dueDate) 
+        desc.value = task.desc
+        updateTodoUI(task.list, taskForm)
+    }
+
+
+
     const createClosePopupBtn = (task, project, taskForm) => {
         const closePopupBtn = taskForm.querySelector('.closePopup');
         closePopupBtn.addEventListener('click', () => { isTaskCreated(task, project) })
     } 
 
     const newTaskPopup  = (task, project) => {
-        const taskForm = document.createElement('form');
-        taskForm.innerHTML = newTaskPopupTmpl();
+        const taskForm = createTaskForm();
         const addNewTodoBtn = taskForm.querySelector('.addNewTodo');
-        taskForm.classList.add('newTaskPopup');
-        taskForm.setAttribute('action', '/')
         cardContainer.append(taskForm);
         createClosePopupBtn(task, project, taskForm);
         addNewTodoBtn.addEventListener('click', (e) => { data.updateTodoData(task), updateTodoUI(task.list, taskForm) })
-        taskForm.addEventListener('submit', (e) => {completeTaskSetup(task, project), e.preventDefault()})
     }
 
     const completeTaskSetup = (task, project) => {
@@ -123,7 +125,7 @@ const domStuff = (function(){
         updateProjectListUI()
     }   
 
-    const checkMarkEvents = () => {
+    const setCheckMarkEvents = () => {
         const labels = document.querySelectorAll('label')
         labels.forEach((label) => {
             const para = label.querySelector('p')
@@ -132,14 +134,8 @@ const domStuff = (function(){
          })
     }
 
-
-
-    const updateProjectListUI = () => {
-        const arr = [...data.projectList]
-        cardContainer.innerHTML = projCard({arr, cardOptionsIcon})
+    const addProjectCardOptions = () => {
         const projTitleBox = document.querySelectorAll('.projTitleBox');
-        const newTaskBtn = document.querySelectorAll('.newTaskBtn')
-        checkMarkEvents()
         projTitleBox.forEach((box) => {
             const cardOptions = document.createElement('img') 
             cardOptions.classList.add('projectOptions')
@@ -147,7 +143,16 @@ const domStuff = (function(){
             box.append(cardOptions)
             cardOptions.addEventListener('click', () => {projectOptionsPopup(box)})
         })
+    }
 
+
+
+    const updateProjectListUI = () => {
+        const projectListCopy = [...data.projectList]
+        cardContainer.innerHTML = projCard({projectListCopy, cardOptionsIcon})
+        const newTaskBtn = document.querySelectorAll('.newTaskBtn')
+        setCheckMarkEvents()
+        addProjectCardOptions()
         newTaskBtn.forEach((btn) => {
             btn.addEventListener('click', () => {initiateNewTask(btn)})
         })

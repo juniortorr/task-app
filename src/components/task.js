@@ -1,6 +1,7 @@
  import { data } from "./data";
  import { callRemoveTask, callNewListItem } from "../app";
-import ListItem from "./listItem";
+ import { dateCheck } from "./dateCheck";
+ import ListItem from "./listItem";
 
  export default class Task {
     constructor(title, dueDate, desc) {
@@ -12,6 +13,8 @@ import ListItem from "./listItem";
         this.checkStatus
         this.priority
     }
+
+    
 
     addListItem() {
         callNewListItem(this.list)
@@ -30,10 +33,8 @@ import ListItem from "./listItem";
     }
 
     setPriority() {
-        const today = new Date();
-        const splitDueDate = this.dueDate.split('-');
-        const formatDueDate = [splitDueDate[2], splitDueDate[0]-1, splitDueDate[1]]
-        console.log(new Date(formatDueDate[0], formatDueDate[1], formatDueDate[2]))
+        // const dateCheck.sortPriority()
+        console.log('yo')
     }
 
     deleteTask(project) {

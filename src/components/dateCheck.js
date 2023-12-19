@@ -4,10 +4,11 @@ import { data } from './data';
 
 const dateCheck = (function(){
     const todayTasks = []
-    const getToday = () => format(new Date(), 'yyyy-MM-dd');
-
+    const priorities = ['overdue','dueThisWeek', 'notDueYet']
+    const getTodayFormatted = () => format(new Date(), 'yyyy-MM-dd');
+    
     const filterTodayTasks = () => {
-        const today = getToday();
+        const today = getTodayFormatted();
         data.projectList.forEach((project) => {
             project.tasks.forEach((task) => {
                 if(task.dueDate === today) {
@@ -34,8 +35,19 @@ const dateCheck = (function(){
         return upcomingTasks;
     }
 
-// 2023-12-08 - this is what the date input sends back
-// we have to get
+    const sortPriority = () => {
+        const today = new Date();
+        const splitDueDate = this.dueDate.split('-');
+        const formatDueDate = [splitDueDate[2], splitDueDate[0]-1, splitDueDate[1]]
+        const dueDate = new Date(formatDueDate[0], formatDueDate[1], formatDueDate[2])
+        const thisWeek = addDays(today, 7);
+        // if(isBefore(dueDate, thisWeek)){
+        //     return priorities[1]
+        // } else if()
+        
+    }
+
+
 
 
 
