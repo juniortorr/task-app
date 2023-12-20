@@ -117,8 +117,10 @@ p {
 .closePopup {
     position: absolute;
     font-size: 1rem;
-    top: 5px;
+    top: 10px;
     right: 10px;
+    background-color: rgb(0 0 0 / 0%);
+    border: none;
 }
 
 .projCard {
@@ -201,6 +203,7 @@ p {
     align-items: center;
     border-radius: 15px;
 }
+
 .taskPopupWrapper {
     display: flex;
     align-items: center;
