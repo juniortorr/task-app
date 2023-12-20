@@ -30,10 +30,11 @@ p {
     gap: 35px;
     justify-content: center;
     font-size: 1.2rem;
-    margin: auto;
+    /* margin: auto; */
     
 }
 .container {
+    margin: 0 auto;
     display: flex;
     width: 95vw;
     gap: 20px;
