@@ -11,7 +11,7 @@
         this.list = []
         this.value = title
         this.checkStatus
-        this.priority
+        this.priority 
     }
 
     
@@ -32,9 +32,20 @@
         }
     }
 
-    setPriority() {
-        // const dateCheck.sortPriority()
-        console.log('yo')
+    setPriority(priorityDiv) {
+        const priorityStatus = dateCheck.sortPriority(this)  
+        console.log(priorityStatus)
+        switch(priorityStatus){
+            case 'overdue':
+                this.priority = 'red';
+                break;
+            case 'dueThisWeek':
+                this.priority = 'yellow';
+                break;
+            case 'notDueYet':
+                this.priority = 'green';
+                break;
+        }
     }
 
     deleteTask(project) {

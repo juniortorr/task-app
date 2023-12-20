@@ -9,8 +9,10 @@ button {
 li {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 10px;
+    margin-left: 15px;
 }
+
 p {
     margin: 0;
 }
@@ -37,6 +39,8 @@ p {
     gap: 20px;
     padding: 30px 30px;
     flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 0;
 }
 
 .cardContainer {
@@ -148,7 +152,6 @@ p {
     width: 50px;
     border-radius: 10px;
     height: 18px;
-    background: #FA4848;
     
 }
 .taskContainer {
@@ -156,7 +159,7 @@ p {
     gap: 10px;
     height: 40px; 
     align-items: center;
-    border-bottom: 2px solid #B2B2B2;
+    border-bottom: 2px solid black;
     width: 85%;
 }
 .taskContainer p {
@@ -195,7 +198,7 @@ p {
     z-index: 5;
     margin-left: -400px; 
     align-items: center;
-    
+    border-radius: 15px;
 }
 .taskPopupWrapper {
     display: flex;
@@ -257,14 +260,18 @@ p {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 0;
 }
 
 .todayCard {
     width: 60%;
-    height: 60%;
-    background-color: lightblue;
+    min-height: 400px;
+    background-color: lightgrey;
+    padding: 15px 0px;
+    border-radius: 15px;
 }
 
 input[type=checkbox] {
@@ -273,4 +280,58 @@ input[type=checkbox] {
     accent-color: green;
     height: 16px;
     width: 16px;
+}
+
+#dueDate {
+    height: 60px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.todo-form {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 15px;
+    box-sizing: border-box;
+}
+
+.todo-form button {
+    height: 30px;
+    background-color: white;
+    border: none;
+    opacity: .7;
+    
+}
+
+.todoList {
+    height: 80px;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+textarea {
+    height: 150px;
+    resize: none;
+    box-sizing: border-box;
+    padding: 15px 15px;
+}
+
+
+.newTodo {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 50%;
+    margin-left: 25px;
+}
+
+.taskComplete, .taskDeleteBtn {
+    height: 60px;
+}
+
+.taskComplete {
+    background-color: rgb(0 0 0 / 0%);
+    border: 2px solid green;
+    color: green;   
 }

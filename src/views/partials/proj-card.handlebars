@@ -1,5 +1,5 @@
 
-{{#each arr}}
+{{#each projectListCopy}}
     <div class="projCard" id="{{this.title}}">
         <div class="projTitleBox" id="{{this.title}}">
                 <h1  class="projTitle">{{this.title}}</h1>
@@ -9,7 +9,7 @@
                 <label  class="taskContainer" for="checkBoxes">
                     <input type="checkbox" id="checkBoxes" name="checkbox">
                     <p>{{this.title}}</p>
-                    <div class="priorityLevel"></div>
+                    <div class="priorityLevel" style="background-color: {{this.priority}};" id="{{this.title}}"></div>
                 </label>
             {{/each}}
             <button class="newTaskBtn {{this.title}}">+ add new task</button>

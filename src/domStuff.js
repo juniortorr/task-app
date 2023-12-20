@@ -30,7 +30,7 @@ const domStuff = (function(){
         form.addEventListener('submit', (e) => { initiateNewProj(input.value), e.preventDefault() })
     }
 
-    const createTaskForm = () => {
+    const createTaskForm = (task, project) => {
         const taskForm = document.createElement('form');
         taskForm.innerHTML = newTaskPopupTmpl();
         taskForm.classList.add('newTaskPopup')
@@ -40,7 +40,7 @@ const domStuff = (function(){
     }
 
     const displaySelectedTask = (task, project) => {
-        const taskForm = createTaskForm()
+        const taskForm = createTaskForm(task, project)
         const addNewTodoBtn = taskForm.querySelector('.addNewTodo');
         const popUpLeft = taskForm.querySelector('.popUpLeft');
         const taskDeleteBtn = createTaskDeleteBtn(task, project);
@@ -54,26 +54,31 @@ const domStuff = (function(){
     const updateTodoUI = (list, taskForm) => {
         const todoList = taskForm.querySelector('.todoList')
         const todoInput = taskForm.querySelector('.newTodo');
-        todoInput.value = '';
-        todoList.innerHTML = todoListTmpl({list})
-        const allTodoLi = todoList.querySelectorAll('li');
-        allTodoLi.forEach((todo) => { 
-            const text = todo.querySelector('p');
-            const todoOptions = document.createElement('img')
-            todoOptions.src = cardOptionsIcon;
-            todoOptions.classList.add('todoOptions');
-            todo.append(todoOptions)
-            todoOptions.addEventListener('click', () => {
-                for(let i=0; i<list.length; i++){
-                    if(text.textContent === list[i]){
-                        list.splice(i, 1)
-                        console.log(list, 'deleted!')
-                        updateTodoUI(list, taskForm)
+        if(todoInput.value === ''){
+            alert('uh something is wrong here')
+        } else {
+            todoInput.value = '';
+            todoList.innerHTML = todoListTmpl({list})
+            const allTodoLi = todoList.querySelectorAll('li');
+            allTodoLi.forEach((todo) => { 
+                const text = todo.querySelector('p');
+                const todoOptions = document.createElement('img')
+                todoOptions.src = cardOptionsIcon;
+                todoOptions.classList.add('todoOptions');
+                todo.append(todoOptions)
+                todoOptions.addEventListener('click', () => {
+                    for(let i=0; i<list.length; i++){
+                        if(text.textContent === list[i]){
+                            list.splice(i, 1)
+                            console.log(list, 'deleted!')
+                            updateTodoUI(list, taskForm)
+                        }
                     }
-                }
+                })
+                
             })
-            
-        })
+        }
+
     }
 
     const createTaskDeleteBtn = (task, project) => {
@@ -103,7 +108,7 @@ const domStuff = (function(){
     } 
 
     const newTaskPopup  = (task, project) => {
-        const taskForm = createTaskForm();
+        const taskForm = createTaskForm(task, project);
         const addNewTodoBtn = taskForm.querySelector('.addNewTodo');
         cardContainer.append(taskForm);
         createClosePopupBtn(task, project, taskForm);
@@ -116,7 +121,6 @@ const domStuff = (function(){
         const taskDesc = document.querySelector('#desc');
         const splitDate = dueDate.value.split('-');
         const formatDueDate = [splitDate[1], splitDate[2], splitDate[0]].join('-');
-        console.log(formatDueDate)
         task.title = taskTitle.value;
         task.dueDate = formatDueDate;
         task.desc = taskDesc.value;
